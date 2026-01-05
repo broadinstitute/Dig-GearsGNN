@@ -4,7 +4,7 @@
 # imports
 import sys
 sys.path.append('/home/javaprog/Code/MlWorkspace/Dig-GearsGNN/')
-from gears import PertData
+from gears import PertData, GEARS
 
 
 
@@ -17,18 +17,19 @@ pert_data.load(data_name = 'norman') # specific dataset name
 pert_data.prepare_split(split = 'simulation', seed = 1) # get data split with seed
 pert_data.get_dataloader(batch_size = 32, test_batch_size = 128) # prepare data loader
 
-# # set up and train a model
+# set up and train a model
 # gears_model = GEARS(pert_data, device = 'cuda:8')
-# gears_model.model_initialize(hidden_size = 64)
-# gears_model.train(epochs = 20)
+gears_model = GEARS(pert_data, device = 'cpu')
+gears_model.model_initialize(hidden_size = 64)
+gears_model.train(epochs = 20)
 
-# # save/load model
-# gears_model.save_model('gears')
-# gears_model.load_pretrained('gears')
+# save/load model
+gears_model.save_model('gears')
+gears_model.load_pretrained('gears')
 
-# # predict
-# gears_model.predict([['CBL', 'CNN1'], ['FEV']])
-# gears_model.GI_predict(['CBL', 'CNN1'], GI_genes_file=None)
+# predict
+gears_model.predict([['CBL', 'CNN1'], ['FEV']])
+gears_model.GI_predict(['CBL', 'CNN1'], GI_genes_file=None)
 
 
 
