@@ -6,6 +6,8 @@ from torch_geometric.data import DataLoader
 import os
 import scanpy as sc
 from tqdm import tqdm
+import logging
+
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -147,6 +149,7 @@ class PertData:
 
         """
         
+        logging.info("using data path: {}".format(data_path))
         if data_name in ['norman', 'adamson', 'dixit', 
                          'replogle_k562_essential', 
                          'replogle_rpe1_essential']:
@@ -171,10 +174,13 @@ class PertData:
             self.adata = sc.read_h5ad(adata_path)
 
         elif os.path.exists(data_path):
+            logging.info("using data path: {}".format(data_path))
             adata_path = os.path.join(data_path, 'perturb_processed.h5ad')
             self.adata = sc.read_h5ad(adata_path)
             self.dataset_name = data_path.split('/')[-1]
             self.dataset_path = data_path
+            logging.info("using data set: {}".format(self.dataset_name))
+
         else:
             raise ValueError("data attribute is either norman, adamson, dixit "
                              "replogle_k562 or replogle_rpe1 "

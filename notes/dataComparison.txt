@@ -1,0 +1,99 @@
+
+
+
+Gears example:
+--------------
+dataset: norman, columns: Index(['condition', 'cell_type', 'dose_val', 'control', 'condition_name'], dtype='object')
+                        condition cell_type dose_val  control          condition_name
+cell_barcode                                                                         
+AAACCTGAGGCATGTG-1   TSC22D1+ctrl      A549      1+1        0   A549_TSC22D1+ctrl_1+1
+AAACCTGAGGCCCTTG-1    KLF1+MAP2K6      A549      1+1        0    A549_KLF1+MAP2K6_1+1
+AAACCTGCACGAAGCA-1           ctrl      A549        1        1             A549_ctrl_1
+AAACCTGCAGACGTAG-1  CEBPE+RUNX1T1      A549      1+1        0  A549_CEBPE+RUNX1T1_1+1
+AAACCTGCAGCCTTGG-1     MAML2+ctrl      A549      1+1        0     A549_MAML2+ctrl_1+1
+AAACCTGCATCTCCCA-1     ctrl+CEBPE      A549      1+1        0     A549_ctrl+CEBPE_1+1
+AAACCTGGTATAATGG-1           ctrl      A549        1        1             A549_ctrl_1
+AAACCTGGTATCGCAT-1      CBL+PTPN9      A549      1+1        0      A549_CBL+PTPN9_1+1
+AAACCTGGTCCATCCT-1    TGFBR2+ETS2      A549      1+1        0    A549_TGFBR2+ETS2_1+1
+AAACCTGGTCCGAAGA-1      SGK1+TBX3      A549      1+1        0      A549_SGK1+TBX3_1+1
+Found 'condition' column. Values:
+['TSC22D1+ctrl', 'KLF1+MAP2K6', 'ctrl', 'CEBPE+RUNX1T1', 'MAML2+ctrl', ..., 'STIL+ctrl', 'CDKN1C+ctrl', 'ctrl+CDKN1B', 'CDKN1B+CDKN1A', 'C3orf72+FOXL2']
+Length: 284
+Categories (284, object): ['AHR+FEV', 'AHR+KLF1', 'AHR+ctrl', 'ARID1A+ctrl', ..., 'ZC3HAV1+HOXC13',
+                           'ZC3HAV1+ctrl', 'ZNF318+FOXL2', 'ZNF318+ctrl']
+
+
+obesity compatiotion data:
+--------------------------
+reading: /home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/broad_obesity/perturb_processed.h5ad
+dataset: obesity, columns: Index(['nCount_RNA', 'nFeature_RNA', 'nCount_guide', 'nFeature_guide',
+       'percent.mt', 'SampleID', 'Day', 'num_features', 'feature_call',
+       'num_umis', 'gene', 'adipo', 'pre_adipo', 'other', 'lipo'],
+      dtype='object')
+                            nCount_RNA  nFeature_RNA  nCount_guide  nFeature_guide  percent.mt SampleID    Day  num_features   feature_call  num_umis  gene  adipo  pre_adipo  other  lipo
+cell                                                                                                                                                                                      
+AATF_P1_AACACACCAAGGTCCA-1        6779          2107            41              12    1.047352  TF150_1  Day14             1  AATF_P1P2_JW2        30  AATF      0          0      1     0
+AATF_P1_AACGCTATCACCTAGA-1       67952          8001           119               1    3.358253  TF150_1  Day14             1  AATF_P1P2_JW3       119  AATF      0          0      1     0
+AATF_P1_AAGGTTAAGATTCACG-1       52474          7595           259               4    7.298853  TF150_1  Day14             1  AATF_P1P2_JW3       256  AATF      1          0      0     0
+AATF_P1_AATCGGCTCACTATGG-1       62788          7786           320               4    4.389374  TF150_1  Day14             1  AATF_P1P2_JW3       317  AATF      0          0      1     0
+AATF_P1_AATCGTTAGCGATAGG-1       65373          7985           331               6    6.450675  TF150_1  Day14             1  AATF_P1P2_JW3       325  AATF      0          1      0     0
+AATF_P1_AATGGGTAGGGTGACA-1      107338          9160           443               8    2.531256  TF150_1  Day14             1  AATF_P1P2_JW3       436  AATF      0          1      0     0
+AATF_P1_ACCATTTCACTTAGGG-1       88704          7522           268               5    6.162067  TF150_1  Day14             1  AATF_P1P2_JW2       264  AATF      1          0      0     1
+AATF_P1_ACCCGTGAGCCTAGAC-1       71889          8008           298               5    2.797368  TF150_1  Day14             1  AATF_P1P2_JW4       294  AATF      0          0      1     0
+AATF_P1_ACCTGGACAATTACTC-1      105663          9383           175               6    3.832941  TF150_1  Day14             1  AATF_P1P2_JW3       170  AATF      1          0      0     0
+AATF_P1_ACTTTCGCAGCACCTT-1       88323          8755           216               5    4.308051  TF150_1  Day14             1  AATF_P1P2_JW2       212  AATF      1          0      0     0
+No 'condition' column found.
+
+(gearsGnn_310) javaprog (md_obesity_competition *) inspect $ 
+
+
+
+
+Data conversion:
+----------------
+
+(gearsGnn_310) javaprog (md_obesity_competition *) inspect $ python3 
+convertObesityDataToGears.py  inspectHda.py                 
+(gearsGnn_310) javaprog (md_obesity_competition *) inspect $ python3 convertObesityDataToGears.py 
+/home/javaprog/Apps/VirtualEnvs/gearsGnn_310/lib/python3.10/site-packages/anndata/utils.py:434: FutureWarning: Importing read_csv from `anndata` is deprecated. Import anndata.io.read_csv instead.
+  warnings.warn(msg, FutureWarning)
+/home/javaprog/Apps/VirtualEnvs/gearsGnn_310/lib/python3.10/site-packages/anndata/utils.py:434: FutureWarning: Importing read_excel from `anndata` is deprecated. Import anndata.io.read_excel instead.
+  warnings.warn(msg, FutureWarning)
+/home/javaprog/Apps/VirtualEnvs/gearsGnn_310/lib/python3.10/site-packages/anndata/utils.py:434: FutureWarning: Importing read_hdf from `anndata` is deprecated. Import anndata.io.read_hdf instead.
+  warnings.warn(msg, FutureWarning)
+/home/javaprog/Apps/VirtualEnvs/gearsGnn_310/lib/python3.10/site-packages/anndata/utils.py:434: FutureWarning: Importing read_loom from `anndata` is deprecated. Import anndata.io.read_loom instead.
+  warnings.warn(msg, FutureWarning)
+/home/javaprog/Apps/VirtualEnvs/gearsGnn_310/lib/python3.10/site-packages/anndata/utils.py:434: FutureWarning: Importing read_mtx from `anndata` is deprecated. Import anndata.io.read_mtx instead.
+  warnings.warn(msg, FutureWarning)
+/home/javaprog/Apps/VirtualEnvs/gearsGnn_310/lib/python3.10/site-packages/anndata/utils.py:434: FutureWarning: Importing read_text from `anndata` is deprecated. Import anndata.io.read_text instead.
+  warnings.warn(msg, FutureWarning)
+/home/javaprog/Apps/VirtualEnvs/gearsGnn_310/lib/python3.10/site-packages/anndata/utils.py:434: FutureWarning: Importing read_umi_tools from `anndata` is deprecated. Import anndata.io.read_umi_tools instead.
+  warnings.warn(msg, FutureWarning)
+GEARS fields added to adata.obs: condition, control, dose_val, cell_type, condition_name
+
+Top conditions:
+condition
+NC+ctrl          8705
+AATF+ctrl         300
+PWP1+ctrl         300
+SOX13+ctrl        300
+SMARCA4+ctrl      300
+SMAD2+ctrl        300
+RXRG+ctrl         300
+RUNX1+ctrl        300
+RREB1+ctrl        300
+RORA+ctrl         300
+RNASEH2C+ctrl     300
+REXO4+ctrl        300
+RBBP7+ctrl        300
+RBAK+ctrl         300
+RB1+ctrl          300
+PPARD+ctrl        300
+SUPT5H+ctrl       300
+PPARA+ctrl        300
+POLR2B+ctrl       300
+PLIN1+ctrl        300
+Name: count, dtype: int64
+
+Saved GEARS-ready file: /home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/broad_obesity/perturb_processed.h5ad
+
