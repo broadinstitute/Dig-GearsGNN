@@ -160,6 +160,15 @@ def main() -> None:
         obs["cell_type"].astype(str) + "_" + obs["condition"].astype(str) + "_" + obs["dose_val"].astype(str)
     )
 
+    # add the gene name to the .var variable
+    adata.var["gene_name"] = adata.var_names
+
+    # add the uns 
+    adata.uns['top_non_dropout_de_20'] = {}
+    adata.uns['non_dropout_gene_idx'] = {}
+    adata.uns['non_zeros_gene_idx'] = {}
+    adata.uns['top_non_zero_de_20'] = {}
+
     # Sanity checks / summary
     print("GEARS fields added to adata.obs: condition, control, dose_val, cell_type, condition_name")
     print("\nTop conditions:")

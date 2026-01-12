@@ -4,7 +4,7 @@
 # imports
 import sys
 sys.path.append('/home/javaprog/Code/MlWorkspace/Dig-GearsGNN/')
-from gears import PertData, GEARS
+from gears import PertData, GEARS, data_utils
 import logging
 
 # constants
@@ -29,6 +29,10 @@ pert_data = PertData('{}/Data'.format(DIR_GEARS)) # specific saved folder
 # pert_data.load(data_name = 'norman') # specific dataset name
 pert_data.load(data_path=DIR_DCC_OBESITY_DATA) # specific dataset name
 
+# compute uns
+data_utils.get_DE_genes(adata=pert_data.adata, skip_calc_de=False)
+data_utils.get_dropout_non_zero_genes(adata=pert_data.adata)
+
 
 pert_data.prepare_split(split = 'simulation', seed = 1) # get data split with seed
 pert_data.get_dataloader(batch_size = 32, test_batch_size = 128) # prepare data loader
@@ -36,6 +40,8 @@ pert_data.get_dataloader(batch_size = 32, test_batch_size = 128) # prepare data 
 # set up and train a model
 # gears_model = GEARS(pert_data, device = 'cuda:8')
 gears_model = GEARS(pert_data, device = 'cpu')
+# gears_model.new_data_process(dataset_name='ob_chal')
+
 gears_model.model_initialize(hidden_size = 64)
 gears_model.train(epochs = 20)
 

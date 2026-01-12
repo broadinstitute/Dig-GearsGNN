@@ -1,5 +1,25 @@
 
 
+Schemas:
+--------
+reading: /home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/norman/perturb_processed.h5ad
+AnnData object with n_obs × n_vars = 91205 × 5045
+    obs: 'condition', 'cell_type', 'dose_val', 'control', 'condition_name'
+    var: 'gene_name'
+    uns: 'non_dropout_gene_idx', 'non_zeros_gene_idx', 'rank_genes_groups_cov_all', 'top_non_dropout_de_20', 'top_non_zero_de_20'
+    layers: 'counts'
+dataset: norman, columns: Index(['condition', 'cell_type', 'dose_val', 'control', 'condition_name'], dtype='object')
+
+reading: /home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/broad_obesity/obesity_challenge_1.h5ad
+AnnData object with n_obs × n_vars = 44846 × 11046
+    obs: 'nCount_RNA', 'nFeature_RNA', 'nCount_guide', 'nFeature_guide', 'percent.mt', 'SampleID', 'Day', 'num_features', 'feature_call', 'num_umis', 'gene', 'adipo', 'pre_adipo', 'other', 'lipo'
+    uns: 'log1p'
+    layers: 'counts'
+dataset: obsity_orig, columns: Index(['nCount_RNA', 'nFeature_RNA', 'nCount_guide', 'nFeature_guide',
+       'percent.mt', 'SampleID', 'Day', 'num_features', 'feature_call',
+       'num_umis', 'gene', 'adipo', 'pre_adipo', 'other', 'lipo'],
+      dtype='object')
+
 
 Gears example:
 --------------
