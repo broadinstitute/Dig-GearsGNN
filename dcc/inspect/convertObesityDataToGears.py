@@ -49,7 +49,8 @@ except ImportError:
 
 
 # constants
-DIR_DATA = "/home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/broad_obesity"
+DIR_GEARS = "/home/javaprog/Data/Broad/GeneticsML/Gears202512"
+DIR_DATA = "{}/Data/broad_obesity".format(DIR_GEARS)
 FILE_OBESITY_ORIGINAL = "{}/obesity_challenge_1.h5ad".format(DIR_DATA)
 FILE_OBESITY_GEARS = "{}/perturb_processed.h5ad".format(DIR_DATA)
 COUNT_CUTOFF_GUIDE_COUNTS = 50

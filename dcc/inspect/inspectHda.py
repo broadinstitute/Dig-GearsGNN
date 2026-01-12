@@ -2,12 +2,13 @@
 import scanpy as sc
 
 # constants
-FILE_DATA = "/home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/norman/perturb_processed.h5ad"
+DIR_GEARS = "/home/javaprog/Data/Broad/GeneticsML/Gears202512"
+FILE_DATA = "{}/Data/norman/perturb_processed.h5ad".format(DIR_GEARS)
 
 map_hda5 = {
-  'norman': '/home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/norman/perturb_processed.h5ad',
-  'obsity_orig': '/home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/broad_obesity/obesity_challenge_1.h5ad',
-  'obesity_gears': '/home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/broad_obesity/perturb_processed.h5ad'
+  'norman': '{}/Data/norman/perturb_processed.h5ad'.format(DIR_GEARS),
+  'obsity_orig': '{}/Data/broad_obesity/obesity_challenge_1.h5ad'.format(DIR_GEARS),
+  'obesity_gears': '{}/Data/broad_obesity/perturb_processed.h5ad'.format(DIR_GEARS)
 }
 
 

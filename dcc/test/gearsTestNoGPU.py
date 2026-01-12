@@ -8,9 +8,9 @@ from gears import PertData, GEARS, data_utils
 import logging
 
 # constants
-FILE_LOG = "gears_obesity.log"
-FILE_LOG = "/home/javaprog/Data/Broad/GeneticsML/Gears202512/Logs/gears_obesity.log"
 DIR_GEARS = "/home/javaprog/Data/Broad/GeneticsML/Gears202512"
+FILE_LOG = "gears_obesity.log"
+FILE_LOG = "{}/Logs/gears_obesity.log".format(DIR_GEARS)
 DIR_DCC_OBESITY_DATA = "{}/Data/broad_obesity".format(DIR_GEARS)
 
 logging.basicConfig(
@@ -28,6 +28,8 @@ pert_data = PertData('{}/Data'.format(DIR_GEARS)) # specific saved folder
 # pert_data.load(data_name = 'norman') # specific dataset name
 # pert_data.load(data_name = 'norman') # specific dataset name
 pert_data.load(data_path=DIR_DCC_OBESITY_DATA) # specific dataset name
+
+pert_data.new_data_process(dataset_name='lipo', adata=pert_data.adata)
 
 # compute uns
 data_utils.get_DE_genes(adata=pert_data.adata, skip_calc_de=False)
