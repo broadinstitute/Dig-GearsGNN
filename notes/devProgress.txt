@@ -1,0 +1,113 @@
+
+
+
+
+20250113 - filter on one cell type for training
+- filtering on only using adipo cells
+original obesity competition data: 
+AnnData object with n_obs × n_vars = 44846 × 11046
+    obs: 'nCount_RNA', 'nFeature_RNA', 'nCount_guide', 'nFeature_guide', 'percent.mt', 'SampleID', 'Day', 'num_features', 'feature_call', 'num_umis', 'gene', 'adipo', 'pre_adipo', 'other', 'lipo'
+    uns: 'log1p'
+    layers: 'counts'
+
+filtered obesity competition data: 
+AnnData object with n_obs × n_vars = 12075 × 11046
+    obs: 'nCount_RNA', 'nFeature_RNA', 'nCount_guide', 'nFeature_guide', 'percent.mt', 'SampleID', 'Day', 'num_features', 'feature_call', 'num_umis', 'gene', 'adipo', 'pre_adipo', 'other', 'lipo'
+    uns: 'log1p'
+    layers: 'counts'
+
+GEARS fields added to adata.obs: condition, control, dose_val, cell_type, condition_name
+
+Top conditions:
+condition
+NC+ctrl          2080
+ctrl              841
+RNASEH2C+ctrl     176
+FAM136A+ctrl      140
+EP400+ctrl        123
+NFIB+ctrl         123
+SMAD2+ctrl        114
+NMI+ctrl          111
+FOS+ctrl          101
+DEK+ctrl          101
+HAND2+ctrl        100
+PPARA+ctrl         99
+POLR2B+ctrl        97
+EDF1+ctrl          96
+TWIST2+ctrl        95
+HMGA1+ctrl         95
+TEAD1+ctrl         94
+ABT1+ctrl          94
+ZHX3+ctrl          94
+BRCA1+ctrl         93
+Name: count, dtype: int64
+
+
+
+
+20250112 - trained model on all broad obesity data
+- high loss 
+- finale logs:
+Epoch 20 Step 701 Train Loss: 13.8960
+Epoch 20 Step 751 Train Loss: 15.7868
+Epoch 20: Train Overall MSE: 0.0385 Validation Overall MSE: 0.0441.  
+Train Top 20 DE MSE: 0.2843 Validation Top 20 DE MSE: 0.2913.
+Done!
+Start Testing...
+Best performing model: Test Top 20 DE MSE: 0.2232
+Start doing subgroup analysis for simulation split...
+test_combo_seen0_mse: nan
+test_combo_seen0_pearson: nan
+test_combo_seen0_mse_de: nan
+test_combo_seen0_pearson_de: nan
+test_combo_seen1_mse: nan
+test_combo_seen1_pearson: nan
+test_combo_seen1_mse_de: nan
+test_combo_seen1_pearson_de: nan
+test_combo_seen2_mse: nan
+test_combo_seen2_pearson: nan
+test_combo_seen2_mse_de: nan
+test_combo_seen2_pearson_de: nan
+test_unseen_single_mse: 0.03642946
+test_unseen_single_pearson: 0.994385570877974
+test_unseen_single_mse_de: 0.22317372
+test_unseen_single_pearson_de: 0.9683170504970424
+test_combo_seen0_pearson_delta: nan
+test_combo_seen0_frac_opposite_direction_top20_non_dropout: nan
+test_combo_seen0_frac_sigma_below_1_non_dropout: nan
+test_combo_seen0_mse_top20_de_non_dropout: nan
+test_combo_seen1_pearson_delta: nan
+test_combo_seen1_frac_opposite_direction_top20_non_dropout: nan
+test_combo_seen1_frac_sigma_below_1_non_dropout: nan
+test_combo_seen1_mse_top20_de_non_dropout: nan
+test_combo_seen2_pearson_delta: nan
+test_combo_seen2_frac_opposite_direction_top20_non_dropout: nan
+test_combo_seen2_frac_sigma_below_1_non_dropout: nan
+test_combo_seen2_mse_top20_de_non_dropout: nan
+test_unseen_single_pearson_delta: 0.7056676001684044
+test_unseen_single_frac_opposite_direction_top20_non_dropout: 0.015000000000000001
+test_unseen_single_frac_sigma_below_1_non_dropout: 0.7733333333333332
+test_unseen_single_mse_top20_de_non_dropout: 0.2339601922650702
+Done!
+
+
+20250111 - fit broad obesity dataset to be similar to norman examle dataset 
+- needed to build the adata.uns data structure; added to gearsTestNoGPU.py
+  pert_data.new_data_process(dataset_name='lipo', adata=pert_data.adata)
+
+  # compute uns
+  data_utils.get_DE_genes(adata=pert_data.adata, skip_calc_de=False)
+  data_utils.get_dropout_non_zero_genes(adata=pert_data.adata)
+
+- error with adata.uns data structure
+Start Training... Traceback (most recent call last): File "/home/javaprog/Code/MlWorkspace/Dig-GearsGNN/dcc/test/gearsTestNoGPU.py", line 42, in <module> gears_model.train(epochs = 20) File "/home/javaprog/Code/MlWorkspace/Dig-GearsGNN/gears/gears.py", line 527, in train loss = loss_fct(pred, y, batch.pert, File "/home/javaprog/Code/MlWorkspace/Dig-GearsGNN/gears/utils.py", line 412, in loss_fct retain_idx = dict_filter[p] KeyError: 'TFEB+ctrl'
+
+- gears seems to build the gene .pkl network file automatically (from input h5da data?)
+
+- see convert scrit in dcc/inspect
+
+
+20250110 - train on norman sample dataset 
+
+
+

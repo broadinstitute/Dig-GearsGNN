@@ -54,6 +54,7 @@ DIR_DATA = "{}/Data/broad_obesity".format(DIR_GEARS)
 FILE_OBESITY_ORIGINAL = "{}/obesity_challenge_1.h5ad".format(DIR_DATA)
 FILE_OBESITY_GEARS = "{}/perturb_processed.h5ad".format(DIR_DATA)
 COUNT_CUTOFF_GUIDE_COUNTS = 50
+COUNT_CUTOFF_RNA = 50000
 
 
 # methods
@@ -68,6 +69,15 @@ def derive_cell_type_from_onehot(obs, onehot_cols: list[str]) -> np.ndarray:
     ct = np.array([onehot_cols[i] for i in idx], dtype=object)
     ct[sums == 0] = "unknown"
     return ct
+
+def print_adata(adata, message):
+    print("{}: \n{}\n".format(message, adata))
+
+    if "cell_type" in adata.obs.columns:
+        print("Found 'cell_type' column. Values:")
+        print(adata.obs["cell_type"].unique())
+    else:
+        print("No 'cell_type' column found.")
 
 
 def main() -> None:
@@ -108,6 +118,16 @@ def main() -> None:
         raise SystemExit(f"ERROR: expected .h5ad input, got: {in_path}")
 
     adata = sc.read_h5ad(str(in_path))
+
+    # log
+    print_adata(message="original obesity competition data", adata=adata)
+
+    # IF FILTER BY CELL TYPE< DO IT  HERE
+    adata = adata[adata.obs["adipo"] == 1].copy()
+
+    # log
+    print_adata(message="filtered adipo obesity competition data", adata=adata)
+
     obs = adata.obs
 
     # Validate required source columns
@@ -126,9 +146,20 @@ def main() -> None:
             + (" ..." if len(cols_preview) > 60 else "")
         )
 
+    # # Determine controls
+    # guide_counts = obs[args.guide_count_col].to_numpy()
+    # is_ctrl = guide_counts <= args.guide_threshold
+
+
+    # CONTROLS
     # Determine controls
-    guide_counts = obs[args.guide_count_col].to_numpy()
-    is_ctrl = guide_counts <= args.guide_threshold
+    # guide_counts = obs[args.guide_count_col].to_numpy()
+    # is_ctrl = guide_counts <= args.guide_threshold
+    obs_column = 'nCount_RNA'
+    guide_counts = obs[obs_column].to_numpy()
+    is_ctrl = guide_counts <= COUNT_CUTOFF_RNA
+
+
 
     # Clean gene symbols
     genes = obs[args.gene_col].astype(str).to_numpy()
@@ -174,6 +205,18 @@ def main() -> None:
     print("GEARS fields added to adata.obs: condition, control, dose_val, cell_type, condition_name")
     print("\nTop conditions:")
     print(obs["condition"].value_counts().head(20))
+
+    if "cell_type" in adata.obs.columns:
+        print("Found 'cell_type' column. Values:")
+        print(adata.obs["cell_type"].unique())
+    else:
+        print("No 'cell_type' column found.")
+
+    if "control" in adata.obs.columns:
+        print("Found 'control' column. Values:")
+        print(adata.obs["control"].value_counts().head(20))
+    else:
+        print("No 'control' column found.")
 
     n_unknown = int((~is_ctrl & (genes_clean == "unknown")).sum())
     if n_unknown:

@@ -43,7 +43,7 @@ Categories (284, object): ['AHR+FEV', 'AHR+KLF1', 'AHR+ctrl', 'ARID1A+ctrl', ...
                            'ZC3HAV1+ctrl', 'ZNF318+FOXL2', 'ZNF318+ctrl']
 
 
-obesity compatiotion data:
+obesity competition data:
 --------------------------
 reading: /home/javaprog/Data/Broad/GeneticsML/Gears202512/Data/broad_obesity/perturb_processed.h5ad
 dataset: obesity, columns: Index(['nCount_RNA', 'nFeature_RNA', 'nCount_guide', 'nFeature_guide',
