@@ -155,9 +155,24 @@ def main() -> None:
     # Determine controls
     # guide_counts = obs[args.guide_count_col].to_numpy()
     # is_ctrl = guide_counts <= args.guide_threshold
-    obs_column = 'nCount_RNA'
-    guide_counts = obs[obs_column].to_numpy()
-    is_ctrl = guide_counts <= COUNT_CUTOFF_RNA
+    # obs_column = 'nCount_RNA'
+    # guide_counts = obs[obs_column].to_numpy()
+    # is_ctrl = guide_counts <= COUNT_CUTOFF_RNA
+
+
+    # CONTROLS - using chatGPT recommended fields to filter
+    # Determine controls based on guide load
+    # GUIDE_COUNT_CUTOFF = 20   # set to 10 or 20 depending on stringency
+
+    # feature_guide = obs["nFeature_guide"].to_numpy()
+    # guide_counts = obs["nCount_guide"].to_numpy()
+    # is_ctrl = (feature_guide == 1) & (guide_counts <= GUIDE_COUNT_CUTOFF)
+
+
+
+    # chatgpt - use explicit names
+    # CONTROLS: Non-targeting guides only
+    is_ctrl = obs["feature_call"].astype(str).str.startswith("NT_")
 
 
 

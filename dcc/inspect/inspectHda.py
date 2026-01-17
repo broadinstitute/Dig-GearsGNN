@@ -46,6 +46,13 @@ if __name__ == "__main__":
         else:
             print("No 'control' column found.")
         
+        # Top feature_call values
+        if "feature_call" in adata.obs.columns:
+            print("Found 'feature_call' column. Values:")
+            print(adata.obs["feature_call"].value_counts().head(50))
+        else:
+            print("No 'feature_call' column found.")
+
         print()
 
 
