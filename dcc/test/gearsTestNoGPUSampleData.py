@@ -1,10 +1,10 @@
 
 
 # working dir
-DIR_USER = "home/javaprog"
+DIR_USER = "/home/javaprog"
 DIR_CODE = "/home/javaprog/Code/MlWorkspace"
 
-DIR_USER = "home/ubuntu"
+DIR_USER = "/home/ubuntu"
 DIR_CODE = "/home/ubuntu/Code"
 
 
@@ -19,7 +19,7 @@ DIR_GEARS = "{}/Data/Broad/GeneticsML/Gears202512".format(DIR_USER)
 print("got GEAR directory: {}".format(DIR_GEARS))
 
 FILE_LOG = "gears_obesity.log"
-FILE_LOG = "{}/Logs/gears_obesity.log".format(DIR_GEARS)
+# FILE_LOG = "{}/Logs/gears_obesity.log".format(DIR_GEARS)
 print("got log file: {}".format(FILE_LOG))
 # DIR_DCC_OBESITY_DATA = "{}/Data/broad_obesity".format(DIR_GEARS)
 
