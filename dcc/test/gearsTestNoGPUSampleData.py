@@ -1,9 +1,12 @@
 
 
+# working dir
+DIR_CODE = "/home/javaprog/Code/MlWorkspace"
+DIR_CODE = "/home/javaprog/Code/MlWorkspace"
 
 # imports
 import sys
-sys.path.append('/home/javaprog/Code/MlWorkspace/Dig-GearsGNN/')
+sys.path.append('{}/Dig-GearsGNN/'.format(DIR_CODE))
 from gears import PertData, GEARS, data_utils
 import logging
 
