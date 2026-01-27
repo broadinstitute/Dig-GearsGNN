@@ -163,7 +163,6 @@ def main() -> None:
     # CONTROLS - using chatGPT recommended fields to filter
     # Determine controls based on guide load
     # GUIDE_COUNT_CUTOFF = 20   # set to 10 or 20 depending on stringency
-
     # feature_guide = obs["nFeature_guide"].to_numpy()
     # guide_counts = obs["nCount_guide"].to_numpy()
     # is_ctrl = (feature_guide == 1) & (guide_counts <= GUIDE_COUNT_CUTOFF)

@@ -2,7 +2,58 @@
 
 
 
-20250113 - filter on one cell type for training
+
+20260117 - using NT_ prefix in feature call (chatgpt) to identify controls
+- in convert script 
+    # chatgpt - use explicit names
+    # CONTROLS: Non-targeting guides only
+    is_ctrl = obs["feature_call"].astype(str).str.startswith("NT_")
+
+
+- good 20% ratio for adipo cells
+Found 'cell_type' column. Values:
+['adipo']
+Found 'control' column. Values:
+control
+0    9833
+1    2242
+Name: count, dtype: int64
+
+
+- training + lot lower loss to start (5 vs 13+)
+Creating dataloaders....
+Done!
+Found local copy...
+Start Training...
+Epoch 1 Step 1 Train Loss: 5.9933
+
+
+
+
+
+20260116 - chat gpt recommende3d filerign and case/controls count
+Recommended minimums (rule of thumb)
+Use case	Minimum controls
+Classical ML	≥ 500
+Deep learning	≥ 1,000
+Perturb-seq / GEARS	5–20% of dataset
+Cell-type–specific controls	≥ 200 per cell type
+
+
+nFeature_guide == 1
+AND
+nCount_guide ≤ 10–20
+
+
+| Situation                    | Use this                                   |
+| ---------------------------- | ------------------------------------------ |
+| Control guides exist         | `feature_call` / `gene`                    |
+| No control guides            | `nFeature_guide == 1` + low `nCount_guide` |
+| Downstream DE / GNN training | Use **explicit controls only**             |
+
+
+
+20260113 - filter on one cell type for training
 - filtering on only using adipo cells
 original obesity competition data: 
 AnnData object with n_obs × n_vars = 44846 × 11046
@@ -45,7 +96,7 @@ Name: count, dtype: int64
 
 
 
-20250112 - trained model on all broad obesity data
+20260112 - trained model on all broad obesity data
 - high loss 
 - finale logs:
 Epoch 20 Step 701 Train Loss: 13.8960
@@ -107,7 +158,7 @@ Start Training... Traceback (most recent call last): File "/home/javaprog/Code/M
 - see convert scrit in dcc/inspect
 
 
-20250110 - train on norman sample dataset 
+20260110 - train on norman sample dataset 
 
 
 
